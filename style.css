@@ -5,13 +5,38 @@
 }
 
 .calendar {
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .calendar table {
-  display: table;
-  border-collapse: separate;
-  border-spacing: 2px;
-  border-color: gray;
+  margin: 0.5rem 1rem;
+  width: 12rem;
+  height: 8rem;
+  text-align: center;
+}
+
+.calendar table caption {
+  background-color: rgb(189, 189, 189);
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.calendar a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.calendar table tr {
+  height: 1rem;
+}
+
+.different {
+  color: rgb(185, 185, 185) !important;
 }
