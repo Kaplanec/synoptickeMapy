@@ -3,3 +3,15 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: gray;
+}
