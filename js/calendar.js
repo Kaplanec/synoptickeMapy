@@ -27,9 +27,23 @@ function generateMonth(offset, name, length, index) {
         <tr>
     `;
     for (let i = offset - 1; i >= 0; i--) {
-        content += `<td>${monthDays[index - 1] - i || 31 - i}</td>`;
+        content += `<td><a href="#" class="different">${monthDays[index - 1] - i || 31 - i}</a></td>`;
     }
-    content += `</tr>`;
+    for (let i = 1; i < 8 - offset; i++) {
+        content += `<td><a href="#">${i}</a></td>`;
+    }
 
-    $(".calendar").append(content + `</table>`);
+    for (let i = 8 - offset; i <= length; i++) {
+        if ((i + offset) % 7 == 1) {
+            content += `</tr>`;
+            content += `<tr>`;
+        }
+        content += `<td><a href="#">${i}</a></td>`;
+    }
+
+    for (let i = 1; i <= (7 - (length % 7 + offset) % 7) * ((length % 7 + offset) % 7 != 0); i++) {
+        content += `<td><a href="#" class="different">${i}</a></td>`;
+    }
+
+    $(".calendar").append(content + `</tr>` + `</table>`);
 }
