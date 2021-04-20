@@ -7,7 +7,10 @@ $(() => {
     generateCalendar(monthNames, monthDays);
 
     $("a").click((e) => {
-        $(e.target).append("lol");
+        let date = ($(e.target).text().length == 1 ? "0" : "") + $(e.target).text() +
+            (($(e.target).parents().eq(3).attr("class").slice(5).length == 1 && $(e.target).parents().eq(3).attr("class").slice(5) != "9") ? "0" : "")
+            + (parseInt($(e.target).parents().eq(3).attr("class").slice(5)) + 1) + year;
+        console.log(date);
     })
 });
 
