@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+.logo {
+  margin-top: 0%;
+  margin-left: 2%;
+  object-fit: contain;
+  height: 20%;
+}
+
 .calendar {
   width: auto;
   height: auto;
