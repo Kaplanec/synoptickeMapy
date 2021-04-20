@@ -35,8 +35,7 @@ function generateMonth(offset, name, length, index) {
 
     for (let i = 8 - offset; i <= length; i++) {
         if ((i + offset) % 7 == 1) {
-            content += `</tr>`;
-            content += `<tr>`;
+            content += `</tr><tr>`;
         }
         content += `<td><a href="#">${i}</a></td>`;
     }
