@@ -7,9 +7,36 @@ $(() => {
     generateCalendar(monthNames, monthDays);
 
     $("a").click((e) => {
-        let date = ($(e.target).text().length == 1 ? "0" : "") + $(e.target).text() +
-            (($(e.target).parents().eq(3).attr("class").slice(5).length == 1 && $(e.target).parents().eq(3).attr("class").slice(5) != "9") ? "0" : "")
-            + (parseInt($(e.target).parents().eq(3).attr("class").slice(5)) + 1) + year;
+        const addDays = text => {
+            return (text.length == 1 ? "0" : "") + text;
+        }
+
+        const addMonth = month => {
+            return (month.length == 1 && month != 9 ? "0" : "") + (parseInt(month) + 1);
+        }
+
+        let date = addDays($(e.target).text());
+        date += addMonth($(e.target).parents().eq(3).attr("class").slice(5));
+        date += year;
+        if ($(e.target).attr("class") == "different") {
+            if ($(e.target).parents().eq(3).attr("class").slice(5) == 0 && parseInt(date.slice(0, -6)) > 8) {
+                date = date.slice(0, -6);
+                date += 12;
+                date += year - 1;
+            } else if (parseInt(date.slice(0, -6)) > 8) {
+                date = date.slice(0, -6);
+                date += addMonth((parseInt($(e.target).parents().eq(3).attr("class").slice(5)) - 1).toString());
+                date += year;
+            } else if ($(e.target).parents().eq(3).attr("class").slice(5) == 11 && parseInt(date.slice(0, -6)) < 8) {
+                date = date.slice(0, -6);
+                date += "01";
+                date += year + 1;
+            } else {
+                date = date.slice(0, -6);
+                date += addMonth((parseInt($(e.target).parents().eq(3).attr("class").slice(5)) + 1).toString());
+                date += year;
+            }
+        }
         console.log(date);
     })
 });
@@ -24,14 +51,14 @@ function generateCalendar(monthNames, monthDays) {
 
 function generateMonth(offset, name, length, index) {
 
-    const addBegining = (content) => {
+    const addBegining = content => {
         for (let i = offset - 1; i >= 0; i--) {
             content += `<td><a href="#" class="different">${monthDays[index - 1] - i || 31 - i}</a></td>`;
         }
         return content;
     }
 
-    const addMidle = (content) => {
+    const addMidle = content => {
         for (let i = 1; i <= length; i++) {
             if ((i + offset) % 7 == 1 && i != 1) {
                 content += `</tr><tr>`;
@@ -41,7 +68,7 @@ function generateMonth(offset, name, length, index) {
         return content;
     }
 
-    const addEnd = (content) => {
+    const addEnd = content => {
         for (let i = 1; i <= (7 - (length % 7 + offset) % 7) * ((length % 7 + offset) % 7 != 0); i++) {
             content += `<td><a href="#" class="different">${i}</a></td>`;
         }
