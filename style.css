@@ -4,11 +4,56 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
+
 .logo {
   margin-top: 0%;
   margin-left: 2%;
   object-fit: contain;
   height: 20%;
+}
+
+.mapDisplay {
+  position: fixed;
+  width: 70%;
+  height: 40rem;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
+  left: 0;
+  right: 0;
+  background-color: rgb(224, 224, 224);
+  border-radius: 5rem;
+}
+
+.fa-times {
+  position: absolute;
+  height: 3rem;
+  width: 3rem;
+  top: 0;
+  right: 0;
+  margin-right: 2rem;
+  margin-top: 2rem;
+}
+
+.fa-arrow-left,
+.fa-arrow-right {
+  height: 3rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.fa-arrow-right {
+  right: 2rem;
+}
+
+.fa-arrow-left {
+  left: 2rem;
 }
 
 .calendar {

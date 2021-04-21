@@ -7,14 +7,23 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/calendar.js"></script>
+    <link
+      href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+      rel="stylesheet"
+      type="text/css"
+    />
 
     <title>meteo.cz</title>
   </head>
   <body>
-    <img src="Meteo2.ico" class="logo" usemap="#logo" />
-    <map name="logo">
-      <area href="stranka1.html" shape="rect" coords="10, 10, 150, 150" />
-    </map>
+    <a href="stranka1.html">
+      <img src="Meteo2.ico" class="logo" />
+    </a>
     <div class="calendar"></div>
+    <div class="mapDisplay">
+      <i class="fa fa-times fa-3x"></i>
+      <i class="fa fa-arrow-left fa-3x"></i>
+      <i class="fa fa-arrow-right fa-3x"></i>
+    </div>
   </body>
 </html>
