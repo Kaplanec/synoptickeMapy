@@ -3,6 +3,7 @@ $(() => {
 
     $("a").click((e) => {
         let date = getDate(e);
+        date = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2) + date.getFullYear();
         $(".mapDisplay").removeClass("hide");
         $(".mapImg").attr("src", `mapy/${date}.jpg`)
     });
@@ -19,13 +20,9 @@ let monthDays = [31, (year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0
 
 
 function getDate(e) {
-    const addDays = text => {
-        return (text.length == 1 ? "0" : "") + text;
-    }
 
     const addMonth = (month, offset) => {
-        month = (parseInt(month) + offset) % 12 >= 0 ? (parseInt(month) + offset) % 12 + 1 : 12
-        return (month.toString().length == 1 ? "0" : "") + month;
+        return (parseInt(month) + offset) % 12 >= 0 ? (parseInt(month) + offset) % 12 : 11
     }
 
     const addYear = (isDifferent, month, days) => {
@@ -40,14 +37,14 @@ function getDate(e) {
         return year;
     }
 
-    let date = addDays($(e.target).text());
-    date += addMonth($(e.target).parents().eq(3).attr("class").slice(5), $(e.target).attr("class") == "different" ? (parseInt($(e.target).text()) > 8 ? -1 : 1) : 0);
-    date += addYear($(e.target).attr("class") == "different", $(e.target).parents().eq(3).attr("class").slice(5), $(e.target).text());
-    return date;
+    return new Date(addYear($(e.target).attr("class") == "different", $(e.target).parents().eq(3).attr("class").slice(5), $(e.target).text()),
+        addMonth($(e.target).parents().eq(3).attr("class").slice(5), $(e.target).attr("class") == "different" ? (parseInt($(e.target).text()) > 8 ? -1 : 1) : 0),
+        parseInt($(e.target).text()));
+
 }
 
 function generateCalendar(monthNames, monthDays) {
-    let offset = new Date(2021, 0, 1).getDay() - 1;
+    let offset = new Date(year, 0, 1).getDay() - 1;
     for (let i = 0; i < 12; i++) {
         $(".calendar").append(generateMonth(offset, monthNames[i], monthDays[i], i));
         offset = (monthDays[i] + offset) % 7;
