@@ -1,16 +1,22 @@
-let year = 2021;
-
-let monthNames = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"];
-let monthDays = [31, (year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
 $(() => {
     generateCalendar(monthNames, monthDays);
 
     $("a").click((e) => {
         let date = getDate(e);
-        console.log(date);
+        $(".mapDisplay").removeClass("hide");
+        $(".mapImg").attr("src", `mapy/${date}.jpg`)
+    });
+
+    $(".fa-times").click(() => {
+        $(".mapDisplay").addClass("hide");
     });
 });
+
+let year = 2021;
+
+let monthNames = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"];
+let monthDays = [31, (year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 
 function getDate(e) {
     const addDays = text => {

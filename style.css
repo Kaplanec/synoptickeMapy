@@ -16,6 +16,10 @@ body {
 }
 
 .mapDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 2s linear all;
   position: fixed;
   width: 70%;
   height: 40rem;
@@ -91,4 +95,8 @@ body {
 
 .different {
   color: rgb(185, 185, 185) !important;
+}
+
+.hide {
+  display: none;
 }
