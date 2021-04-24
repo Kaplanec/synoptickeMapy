@@ -7,39 +7,38 @@ $(() => {
     generateCalendar(monthNames, monthDays);
 
     $("a").click((e) => {
-        const addDays = text => {
-            return (text.length == 1 ? "0" : "") + text;
-        }
+        let date = getDate(e);
+        console.log(date);
+    });
+});
 
-        const addMonth = month => {
-            return (month.length == 1 && month != 9 ? "0" : "") + (parseInt(month) + 1);
-        }
+function getDate(e) {
+    const addDays = text => {
+        return (text.length == 1 ? "0" : "") + text;
+    }
 
-        let date = addDays($(e.target).text());
-        date += addMonth($(e.target).parents().eq(3).attr("class").slice(5));
-        date += year;
-        if ($(e.target).attr("class") == "different") {
-            if ($(e.target).parents().eq(3).attr("class").slice(5) == 0 && parseInt(date.slice(0, -6)) > 8) {
-                date = date.slice(0, -6);
-                date += 12;
-                date += year - 1;
-            } else if (parseInt(date.slice(0, -6)) > 8) {
-                date = date.slice(0, -6);
-                date += addMonth((parseInt($(e.target).parents().eq(3).attr("class").slice(5)) - 1).toString());
-                date += year;
-            } else if ($(e.target).parents().eq(3).attr("class").slice(5) == 11 && parseInt(date.slice(0, -6)) < 8) {
-                date = date.slice(0, -6);
-                date += "01";
-                date += year + 1;
-            } else {
-                date = date.slice(0, -6);
-                date += addMonth((parseInt($(e.target).parents().eq(3).attr("class").slice(5)) + 1).toString());
-                date += year;
+    const addMonth = (month, offset) => {
+        month = (parseInt(month) + offset) % 12 >= 0 ? (parseInt(month) + offset) % 12 + 1 : 12
+        return (month.toString().length == 1 ? "0" : "") + month;
+    }
+
+    const addYear = (isDifferent, month, days) => {
+        if (isDifferent) {
+            if (month == 0 && parseInt(days) > 8) {
+                return year - 1;
+            }
+            if (month == 11 && parseInt(days) < 8) {
+                return year + 1;
             }
         }
-        console.log(date);
-    })
-});
+        return year;
+    }
+
+    let date = addDays($(e.target).text());
+    date += addMonth($(e.target).parents().eq(3).attr("class").slice(5), $(e.target).attr("class") == "different" ? (parseInt($(e.target).text()) > 8 ? -1 : 1) : 0);
+    date += addYear($(e.target).attr("class") == "different", $(e.target).parents().eq(3).attr("class").slice(5), $(e.target).text());
+    return date;
+}
 
 function generateCalendar(monthNames, monthDays) {
     let offset = new Date(2021, 0, 1).getDay() - 1;
