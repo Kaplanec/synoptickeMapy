@@ -44,6 +44,15 @@ body {
   border-radius: 5rem;
 }
 
+.mapImg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .fa-times {
   position: absolute;
   height: 3rem;
