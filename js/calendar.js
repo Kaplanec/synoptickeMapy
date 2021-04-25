@@ -1,15 +1,26 @@
+let date;
+const formatDate = date => ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2) + date.getFullYear();
 $(() => {
     generateCalendar(monthNames, monthDays);
 
     $("a").click((e) => {
-        let date = getDate(e);
-        date = ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2) + date.getFullYear();
+        date = getDate(e);
         $(".mapDisplay").removeClass("hide");
-        $(".mapImg").attr("src", `mapy/${date}.jpg`)
+        $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
     });
 
     $(".fa-times").click(() => {
         $(".mapDisplay").addClass("hide");
+    });
+
+    $(".fa-arrow-left").click(() => {
+        date.setDate(date.getDate() - 1);
+        $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
+    });
+
+    $(".fa-arrow-right").click(() => {
+        date.setDate(date.getDate() + 1);
+        $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
     });
 });
 
@@ -18,21 +29,15 @@ let year = 2021;
 let monthNames = ["Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"];
 let monthDays = [31, (year % 100 !== 0) && (year % 4 === 0) || (year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-
 function getDate(e) {
-
     const addMonth = (month, offset) => {
         return (parseInt(month) + offset) % 12 >= 0 ? (parseInt(month) + offset) % 12 : 11
     }
 
     const addYear = (isDifferent, month, days) => {
         if (isDifferent) {
-            if (month == 0 && parseInt(days) > 8) {
-                return year - 1;
-            }
-            if (month == 11 && parseInt(days) < 8) {
-                return year + 1;
-            }
+            if (month == 0 && parseInt(days) > 8) { return year - 1; }
+            if (month == 11 && parseInt(days) < 8) { return year + 1; }
         }
         return year;
     }
@@ -52,7 +57,6 @@ function generateCalendar(monthNames, monthDays) {
 }
 
 function generateMonth(offset, name, length, index) {
-
     const addBegining = content => {
         for (let i = offset - 1; i >= 0; i--) {
             content += `<td><a href="#" class="different">${monthDays[index - 1] - i || 31 - i}</a></td>`;
