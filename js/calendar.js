@@ -1,5 +1,11 @@
 let date;
 const formatDate = date => ('0' + date.getDate()).slice(-2) + ('0' + (date.getMonth() + 1)).slice(-2) + date.getFullYear();
+
+const setDateOffset = offset => {
+    date.setDate(date.getDate() + offset);
+    $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
+};
+
 $(() => {
     generateCalendar(monthNames, monthDays);
 
@@ -14,13 +20,16 @@ $(() => {
     });
 
     $(".fa-arrow-left").click(() => {
-        date.setDate(date.getDate() - 1);
-        $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
+        setDateOffset(-1);
     });
 
     $(".fa-arrow-right").click(() => {
-        date.setDate(date.getDate() + 1);
-        $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
+        setDateOffset(1);
+    });
+
+    $(document).keydown(e => {
+        if (e.which == 37) { setDateOffset(-1); }
+        else if (e.which == 39) { setDateOffset(1); }
     });
 });
 
