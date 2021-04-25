@@ -15,7 +15,19 @@ body {
   height: 20%;
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  z-index: 90;
+  opacity: 0.5;
+}
+
 .mapDisplay {
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,6 +52,7 @@ body {
   right: 0;
   margin-right: 2rem;
   margin-top: 2rem;
+  cursor: pointer;
 }
 
 .fa-arrow-left,
@@ -50,6 +63,14 @@ body {
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
+  cursor: pointer;
+}
+
+.fa-arrow-left:hover,
+.fa-arrow-right:hover,
+.fa-times:hover {
+  transition: 0.1s;
+  color: rgb(143, 143, 143);
 }
 
 .fa-arrow-right {

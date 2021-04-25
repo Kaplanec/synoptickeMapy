@@ -12,11 +12,13 @@ $(() => {
     $("a").click((e) => {
         date = getDate(e);
         $(".mapDisplay").removeClass("hide");
+        $(".overlay").removeClass("hide");
         $(".mapImg").attr("src", `mapy/${formatDate(date)}.jpg`);
     });
 
     $(".fa-times").click(() => {
         $(".mapDisplay").addClass("hide");
+        $(".overlay").addClass("hide");
     });
 
     $(".fa-arrow-left").click(() => {
