@@ -6,7 +6,6 @@
 
 body {
   font-family: "Courier New", Courier, monospace;
-  position: relative;
 }
 
 .logo {
@@ -112,6 +111,7 @@ body {
   }
 }
 .calendar {
+  margin-top: 50px;
   width: auto;
   height: auto;
   display: flex;
@@ -155,41 +155,41 @@ body {
 
 .menu {
   text-align: center;
-    position: absolute;
-    top:0;
-    background-color: #194A59;
-    width:100%;
-    height: 50px;
-    left:0px;
-    padding-top: 0px;
-    z-index: 20;
+  position: absolute;
+  top: 0;
+  background-color: #194a59;
+  width: 100%;
+  height: 50px;
+  left: 0px;
+  padding-top: 0px;
+  z-index: 20;
 }
 
-.menuwrap{
+.menuwrap {
   width: 1000px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   left: 225px;
   position: absolute;
 }
 
-.tlacoHome{
-  display:block;
+.tlacoHome {
+  display: block;
   height: 50px;
-  width:250px;
-  background-color: #194A59;
+  width: 250px;
+  background-color: #194a59;
   color: #a67b50;
-  float:left;
-  margin-left:0px;
+  float: left;
+  margin-left: 0px;
   text-decoration: none;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 25px;
   margin-top: 0px;
 }
 
-.tlacoHome:hover{
+.tlacoHome:hover {
   background-color: rgb(255, 255, 255);
-  color:#194A59;
+  color: #194a59;
   transition: 0.9s;
 }
 
@@ -197,7 +197,13 @@ body {
   line-height: 50px;
 }
 
-.logoM{
+.a-logo {
+  display: block;
+  height: 100%;
+  float: left;
+}
+
+.logoM {
   z-index: 21;
   margin-top: 0px;
   margin-left: 0px;
